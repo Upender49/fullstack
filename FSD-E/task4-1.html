@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User Data Table</title>
+</head>
+<body>
+
+<h1>User Data from API</h1>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Website</th>
+        </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+</table>
+
+<script>
+    const API_URL = 'https://jsonplaceholder.typicode.com/users';
+
+    async function fetchData() {
+        const response = await fetch(API_URL);
+        const users = await response.json();
+
+        let rows = "";
+
+        // Loop through users
+        for (let i = 0; i < users.length; i++) {
+            rows += `
+                <tr>
+                    <td>${users[i].id}</td>
+                    <td>${users[i].name}</td>
+                    <td>${users[i].username}</td>
+                    <td>${users[i].email}</td>
+                    <td>${users[i].phone}</td>
+                    <td>${users[i].website}</td>
+                </tr>
+            `;
+        }
+        // Insert all rows at once
+        document.getElementById("tableBody").innerHTML = rows;
+    }
+
+    fetchData();
+</script>
+
+</body>
+</html>
